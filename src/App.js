@@ -1,23 +1,48 @@
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Login from './pages/Authendication/Login';
+import Signup from './pages/Authendication/Signup';
+import Forgot from './pages/Authendication/Forgot';
+import ApplicationLayout from './pages/Application/ApplicationLayout';
+import ResetPassword from './pages/Authendication/ResetPassword';
+import Dashboard from './pages/Application/pages/Dasboard';
+import MyAccount from './pages/Application/pages/MyAccount';
+import { useUser } from './context/Users.context';
+import Documentation from './pages/Application/pages/Documentation';
+import MyCalendar from './pages/Application/pages/MyCalendar';
+import Todos from './pages/Application/pages/Todos'
+import Contacts from './pages/Application/pages/Contacts';
+import Holiday from './pages/Application/pages/Holiday';
 
 function App() {
+
+  const { isLoggedin } = useUser();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        {/* {!isLoggedin ? (
+          <> */}
+            <Route path='/' Component={Login}></Route>
+            <Route path='/signup' Component={Signup}></Route>
+            <Route path='/forgot' Component={Forgot}></Route>
+            <Route path='/ResetPassword/:token' Component={ResetPassword}></Route>
+          {/* </>
+        )
+          :
+          ( */}
+            <Route path='/ApplicationLayout' Component={ApplicationLayout}>
+              <Route path='dashboard' Component={Dashboard}></Route>
+              <Route path='myAccount' Component={MyAccount}></Route>
+              <Route path='documentation' Component={Documentation}></Route>
+              <Route path='myCalendar' Component={MyCalendar}></Route>
+              <Route path='todos' Component={Todos}></Route>
+              <Route path='contacts' Component={Contacts}></Route>
+              <Route path='holiday' Component={Holiday}></Route>
+            </Route>
+          {/* )
+        } */}
+      </Routes>
     </div>
   );
 }
