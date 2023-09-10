@@ -21,16 +21,16 @@ function App() {
   return (
     <div>
       <Routes>
-        {/* {!isLoggedin ? (
-          <> */}
+        {!isLoggedin ? (
+          <>
             <Route path='/' Component={Login}></Route>
             <Route path='/signup' Component={Signup}></Route>
             <Route path='/forgot' Component={Forgot}></Route>
             <Route path='/ResetPassword/:token' Component={ResetPassword}></Route>
-          {/* </>
+          </>
         )
           :
-          ( */}
+          (
             <Route path='/ApplicationLayout' Component={ApplicationLayout}>
               <Route path='dashboard' Component={Dashboard}></Route>
               <Route path='myAccount' Component={MyAccount}></Route>
@@ -40,8 +40,8 @@ function App() {
               <Route path='contacts' Component={Contacts}></Route>
               <Route path='holiday' Component={Holiday}></Route>
             </Route>
-          {/* )
-        } */}
+          )
+        }
       </Routes>
     </div>
   );
