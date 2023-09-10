@@ -116,21 +116,23 @@ export default function UsersContextProvider({ children }) {
         const LOGIN_URL = process.env.NODE_ENV === 'development' ? `${process.env.REACT_APP_DEV_URL_FOR_BACKEND}/login` : `${process.env.REACT_APP_PRO_URL_FOR_BACKEND}/login`;
         axios.post(LOGIN_URL, input)
             .then(res => {
-                if (res.data.message === "Login Successful!!") {
-                    sessionStorage.setItem("Authorization", res.data.token);
-                    var decoded = jwtDecode(res.data.token);
-                    // sessionStorage.setItem("Token", JSON.stringify(decoded))
-                    setSigninUser(decoded.name);
-                    setIsLoggedin(true);
-                    if (decoded.role.includes("user")) {
-                        navigat('/ApplicationLayout/dashboard');
+                if (res.data.success) {
+                    if (res.data.message === "Login Successful!!") {
+                        sessionStorage.setItem("Authorization", res.data.token);
+                        var decoded = jwtDecode(res.data.token);
+                        // sessionStorage.setItem("Token", JSON.stringify(decoded))
+                        setSigninUser(decoded.name);
+                        setIsLoggedin(true);
+                        if (decoded.role.includes("user")) {
+                            navigat('/ApplicationLayout/dashboard');
+                        }
+                    }
+                    else {
+                        alert("Password is wrong, Try Again!!");
                     }
                 }
-                else if (res.data.message === "Password is wrong, Try Again!!") {
-                    alert(res.data.message);
-                }
-                else if (res.data.message === "Account Does not Exists, Please create your account to continue!!") {
-                    alert(res.data.message);
+                else {
+                    alert("Account Does not Exists, Please create your account to continue!!");
                 }
             })
             .catch(err => {
