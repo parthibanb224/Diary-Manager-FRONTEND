@@ -272,7 +272,7 @@ export default function Holiday() {
                 setHolidayInput({ countryName: '', year: '' });
             })
             .catch(err => {
-                alert("Free Limit Exceeded, Please Subscribe Paid Palns...");
+                alert("Free Limit Exceeded, Please Subscribe Paid Plans...");
             })
     }
 

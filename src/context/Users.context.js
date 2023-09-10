@@ -254,13 +254,12 @@ export default function UsersContextProvider({ children }) {
         event.preventDefault();
         const todosCopy = [...todos];
         todosCopy.push(todo);
-        setTodo({});
         setTodos(todosCopy);
         setTododsDuplicate(todosCopy);
         const URL = process.env.NODE_ENV === 'development' ? `${process.env.REACT_APP_DEV_URL_FOR_BACKEND}/todo/add/${signinUser}` : `${process.env.REACT_APP_PRO_URL_FOR_BACKEND}/todo/add/${signinUser}`;
         axios.post(URL, todo)
             .then(res => {
-
+                setTodo({});
             })
             .catch(err => {
                 console.log(err)

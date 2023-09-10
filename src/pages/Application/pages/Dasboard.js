@@ -70,7 +70,7 @@ const Dashboard = () => {
   };
 
   // Calculate task completion rate
-  const completedTasks = todos.filter((task) => task.status === 'completed').length;
+  const completedTasks = todos.filter((task) => task.status === 'Completed').length;
   const totalTasks = todos.length;
   const taskCompletionRateData = {
     labels: ['Completed', 'Not Completed'],
