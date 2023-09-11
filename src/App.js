@@ -13,10 +13,17 @@ import MyCalendar from './pages/Application/pages/MyCalendar';
 import Todos from './pages/Application/pages/Todos'
 import Contacts from './pages/Application/pages/Contacts';
 import Holiday from './pages/Application/pages/Holiday';
+import { useEffect } from 'react';
 
 function App() {
 
-  const { isLoggedin } = useUser();
+  const { isLoggedin,setIsLoggedin } = useUser();
+  useEffect(() => {
+    let token = sessionStorage.getItem("Authorization");
+    if (token) {
+      setIsLoggedin(true);
+    }
+  },[])
 
   return (
     <div>
