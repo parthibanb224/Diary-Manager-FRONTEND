@@ -14,16 +14,19 @@ import Todos from './pages/Application/pages/Todos'
 import Contacts from './pages/Application/pages/Contacts';
 import Holiday from './pages/Application/pages/Holiday';
 import { useEffect } from 'react';
+import jwtDecode from 'jwt-decode';
 
 function App() {
 
-  const { isLoggedin,setIsLoggedin } = useUser();
+  const { isLoggedin, setIsLoggedin, setSigninUser } = useUser();
   useEffect(() => {
     let token = sessionStorage.getItem("Authorization");
     if (token) {
+      var decoded = jwtDecode(token);
+      setSigninUser(decoded.name);
       setIsLoggedin(true);
     }
-  },[])
+  }, [])
 
   return (
     <div>

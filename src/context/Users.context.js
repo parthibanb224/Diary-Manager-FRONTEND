@@ -113,8 +113,13 @@ export default function UsersContextProvider({ children }) {
 
     const handleLogin = (event) => {
         event.preventDefault();
+        const axiosConfig = {
+            headers: {
+                'Cache-Control': 'no-store, no-cache, must-revalidate, private',
+            },
+        };
         const LOGIN_URL = process.env.NODE_ENV === 'development' ? `${process.env.REACT_APP_DEV_URL_FOR_BACKEND}/login` : `${process.env.REACT_APP_PRO_URL_FOR_BACKEND}/login`;
-        axios.post(LOGIN_URL, input)
+        axios.post(LOGIN_URL, input, axiosConfig)
             .then(res => {
                 if (res.data.success) {
                     if (res.data.message === "Login Successful!!") {
@@ -123,9 +128,7 @@ export default function UsersContextProvider({ children }) {
                         // sessionStorage.setItem("Token", JSON.stringify(decoded))
                         setSigninUser(decoded.name);
                         setIsLoggedin(true);
-                        if (decoded.role.includes("user")) {
-                            navigat('/ApplicationLayout/dashboard');
-                        }
+                        navigat('/ApplicationLayout/dashboard', { replace: true });
                     }
                     else {
                         alert("Password is wrong, Try Again!!");
@@ -161,10 +164,17 @@ export default function UsersContextProvider({ children }) {
             })
     }
 
-    const handleLogout = (event) => {
+    const handleLogout = async(event) => {
+        const axiosConfigs = {
+            headers: {
+                'Cache-Control': 'no-store, no-cache, must-revalidate, private',
+            },
+        };
+        const LOGOUT_URL = process.env.NODE_ENV === 'development' ? `${process.env.REACT_APP_DEV_URL_FOR_BACKEND}/login/logout` : `${process.env.REACT_APP_PRO_URL_FOR_BACKEND}/login/logout`;
+        await axios.post(LOGOUT_URL, axiosConfigs);
         setIsLoggedin(false);
         sessionStorage.removeItem('Authorization');
-        navigat('/');
+        navigat('/', { replace: true });
     }
 
     const handleUpdateUser = (event) => {
@@ -396,6 +406,7 @@ export default function UsersContextProvider({ children }) {
         handleMail,
         loaded,
         signinUser,
+        setSigninUser,
         isLoggedin,
         handleLogout,
         setIsLoggedin,
