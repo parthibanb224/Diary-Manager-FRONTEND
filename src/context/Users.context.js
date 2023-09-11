@@ -164,17 +164,22 @@ export default function UsersContextProvider({ children }) {
             })
     }
 
-    const handleLogout = async(event) => {
+    const handleLogout = async (event) => {
         const axiosConfigs = {
             headers: {
                 'Cache-Control': 'no-store, no-cache, must-revalidate, private',
             },
         };
         const LOGOUT_URL = process.env.NODE_ENV === 'development' ? `${process.env.REACT_APP_DEV_URL_FOR_BACKEND}/login/logout` : `${process.env.REACT_APP_PRO_URL_FOR_BACKEND}/login/logout`;
-        await axios.post(LOGOUT_URL, axiosConfigs);
-        setIsLoggedin(false);
-        sessionStorage.removeItem('Authorization');
-        navigat('/', { replace: true });
+        await axios.post(LOGOUT_URL, axiosConfigs)
+            .then(res => {
+                if (res.data === "Logged out successfully") {
+                    setIsLoggedin(false);
+                    sessionStorage.removeItem('Authorization');
+                    navigat('/', { replace: true });
+                }
+            })
+            .catch(err => console.log(err))
     }
 
     const handleUpdateUser = (event) => {

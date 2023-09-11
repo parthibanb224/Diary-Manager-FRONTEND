@@ -48,7 +48,7 @@ export default function Todos() {
 
     return (
         <div className="p-5">
-            <h1 className="text-center text-3xl mb-3 font-bold">TASKS</h1>
+            <h1 className="text-center text-3xl mb-3 font-bold">TODOS</h1>
             <div className="container-fluid">
                 <div className="card shadow-lg">
                     <div className="card-body">

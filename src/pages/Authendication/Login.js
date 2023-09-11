@@ -10,9 +10,9 @@ export default function Login() {
     const { input, setInput, handleLogin } = useUser();
 
     return (
-        <div className='flex'>
+        <div className='grid grid-cols-2 gap-4 overflow-x-hidden'>
 
-            <div className='w-2/5'>
+            <div className='col-span-2 sm:col-span-1'>
                 <img
                     className="lg:h-screen lg:w-fit"
                     src="/Assets/3d-casual-life-young-woman-writing-in-a-notebook.png"
@@ -20,12 +20,12 @@ export default function Login() {
                 />
             </div>
 
-            <div className='w-3/5'>
+            <div className='col-span-2 sm:col-span-1'>
                 <div className="flex h-screen justify-center items-center min-h-full flex-1 flex-col px-6 py-12 lg:px-8">
 
                     <div className="mt-3 sm:mx-auto sm:w-full sm:max-w-lg">
                         <div className="sm:w-full sm:max-w-sm">
-                            <h1 style={{width:"600px"}} className="animate-charcter">DIARY MANAGER</h1>
+                            <h1 className="animate-charcter sm:w-screen">DIARY MANAGER</h1>
 
                         </div>
                         <form className="space-y-6" action="#" method="POST" onSubmit={handleLogin}>

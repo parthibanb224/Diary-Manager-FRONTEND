@@ -7,7 +7,7 @@ const TasksComponent = ({ tasks }) => {
 
   return (
     <div className="widget">
-      <h2 className='font-bold text-center mb-2'>TASKS</h2>
+      <h2 className='font-bold text-center mb-2'>TODOS</h2>
       <ul>
         {tasks.length > 0 ? tasks.map((task, index) => (
           <div key={index} className='card flex'>
